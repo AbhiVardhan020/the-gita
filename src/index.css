@@ -1,13 +1,40 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: "Mate SC", serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.bgParch{
+    background-image: url('/public/images/Parch1.png');
+}
+
+.borderImg {
+    border: 35px solid black;
+    border-image: url('/public/images/B3.jpg') 13% repeat;
+}
+
+.mask{
+    font-family: 'Lobster', sans-serif;
+}
+
+.lineWrap{
+    white-space: pre-wrap;
+}
+
+.verse{
+    font-family: 'Noto Serif Devanagari', serif;
+}
+
+
+.hero{
+    font-family: 'Amita', serif;
+}
+
+@media only screen and (max-width: 48rem) {
+  .borderImg{
+    border: 20px solid black;
+    border-image: url('/public/images/B3.jpg') 13% repeat;
+  }
 }
