@@ -3,6 +3,8 @@
 **The Gita** is a minimal, beautifully designed web application that allows users to read and explore the chapters and verses of the sacred Bhagavad Gita. The project is built with a deep emphasis on simplicity, accessibility, and traditional Indian aesthetics.
 
 ---
+## Live Demo : https://the-gita.vercel.app
+---
 
 ## ✨ Features
 
