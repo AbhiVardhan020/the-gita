@@ -15,9 +15,8 @@ export default function Verse() {
             const res = await import(`../verses/v${chapter}.js`)
             setVerses(res.default[verse-1])
             setCnt(res.default.length)
-            console.log(res.default[verse-1])
         } catch (error) {
-            
+            console.log('Error occured')
         }
     }
 
@@ -35,7 +34,7 @@ export default function Verse() {
                 <button 
                 className='fixed w-10 h-10 rounded-full left-[5%] top-[50%] cursor-pointer'
                 onClick={()=>{
-                    if(verse!==1){ navigate(`/chapter/${chapter}/verse/${parseInt(verse)-1}`) }
+                    if(parseInt(verse)!==1){ navigate(`/chapter/${chapter}/verse/${parseInt(verse)-1}`) }
                     else{ navigate(`/chapter/${parseInt(chapter)-1}`) }
                 }}
                 >
@@ -49,7 +48,7 @@ export default function Verse() {
                 <button 
                 className='fixed w-10 h-10 rounded-full right-[5%] top-[50%] cursor-pointer flex justify-center items-center'
                 onClick={()=>{
-                    if(verse!==cnt){ navigate(`/chapter/${chapter}/verse/${parseInt(verse)+1}`) }
+                    if(parseInt(verse)!==cnt){ navigate(`/chapter/${chapter}/verse/${parseInt(verse)+1}`) }
                     else{ navigate(`/chapter/${parseInt(chapter)+1}`) }
                 }}
                 >
