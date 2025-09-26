@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Chapters from '../Chapters'
+import Loader from './Loader'
 
 export default function Chapter() {
 
@@ -30,7 +31,13 @@ export default function Chapter() {
     }
     }, [chapter])
 
-    if(!verses) return <div className=''>Loading...</div>
+    if(!verses){
+        return(
+            <div className='h-full flex justify-center items-center'>
+                <Loader />
+            </div>
+        )
+    }
 
 
     return (

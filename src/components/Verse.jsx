@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import Loader from './Loader'
 
 export default function Verse() {
 
@@ -25,7 +26,7 @@ export default function Verse() {
         window.scroll(0, 0)
     }, [chapter, verse])
 
-    if(!verses) return <div className=''>Loading</div>
+    if(!verses) return <div className='h-[70vh] flex justify-center items-center'><Loader /></div>
 
     return (
         <div className='flex justify-center flex-col relative items-center mt-5'>
