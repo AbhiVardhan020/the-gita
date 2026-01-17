@@ -4,27 +4,47 @@ import Loader from './Loader'
 
 export default function Verse() {
 
-    const [cnt, setCnt] = React.useState(0)
-    const [verses, setVerses] = React.useState(null)
+    
+    const [verses, setVerses] = React.useState(null);
+    const [cnt, setCnt] = React.useState(null)
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { chapter, verse } = useParams();
 
-    const { chapter, verse } = useParams()
+    const chapterNum = Number(chapter);
+    const verseNum = Number(verse);
 
-    const getVerse = async()=>{
-        try {
-            const res = await import(`../verses/v${chapter}.js`)
-            setVerses(res.default[verse-1])
-            setCnt(res.default.length)
-        } catch (error) {
-            console.log('Error occured')
+    const isValidChapter = chapterNum >= 1 && chapterNum <= 18;
+    const isValidVerse = Number.isInteger(verseNum) && verseNum >= 1;
+
+    React.useEffect(() => {
+        if (!isValidChapter || !isValidVerse) {
+            navigate("/", { replace: true });
+            return;
         }
-    }
 
-    React.useEffect(()=>{
-        getVerse()
-        window.scroll(0, 0)
-    }, [chapter, verse])
+        const loadVerse = async () => {
+            try {
+            const res = await import(`../verses/v${chapterNum}.js`);
+            const totalVerses = res.default.length;
+            setCnt(totalVerses)
+            if (verseNum > totalVerses) {
+                navigate("/", { replace: true });
+                return;
+            }
+
+            setVerses(res.default[verseNum - 1]);
+            window.scrollTo(0, 0);
+
+            } catch (err) {
+            console.error("Error loading verse", err);
+            navigate("/", { replace: true });
+            }
+        };
+
+        loadVerse();
+    }, [chapterNum, verseNum, isValidChapter, isValidVerse, navigate]);
+
 
     if(!verses) return <div className='h-[70vh] flex justify-center items-center'><Loader /></div>
 
@@ -63,8 +83,18 @@ export default function Verse() {
 
                 {/* Verse Number Header */}
                 <div className="text-center">
-                    <h2 className="text-2xl md:text-4xl font-bold">Verse {verses.verse_number}</h2>
-                    <p className="text-md md:text-3xl italic text-yellow-950">Chapter {chapter}</p>
+                    <h2 
+                        className="text-2xl md:text-4xl font-bold cursor-pointer"
+                        onClick={()=>navigate(`/chapter/${chapter}`)}
+                        >
+                        Verse {verses.verse_number}
+                    </h2>
+                    <p 
+                        className="text-md md:text-3xl italic text-yellow-950 cursor-pointer"
+                        onClick={()=>navigate(`/`)}
+                    >
+                        Chapter {chapter}
+                    </p>
                 </div>
 
                 {/* Sanskrit Verse */}

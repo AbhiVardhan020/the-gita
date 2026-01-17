@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Chapter from './components/Chapter';
 import Verse from './components/Verse';
+import NoPage from './components/NoPage';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
                     <Route path='/' element={ <Home /> } />
                     <Route path='/chapter/:chapter' element={ <Chapter /> } />
                     <Route path='/chapter/:chapter/verse/:verse' element={ <Verse /> } />
+                    <Route path='*' element={ <NoPage /> } />
                 </Route>
             </Routes>
         </BrowserRouter>

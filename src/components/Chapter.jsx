@@ -8,7 +8,7 @@ export default function Chapter() {
     const { chapter } = useParams()
 
     const navigate = useNavigate()
-
+    
     const [verses, setVerses] = React.useState([])
 
     const getVerses = async()=>{
@@ -20,16 +20,23 @@ export default function Chapter() {
         }
     }
 
-    React.useEffect(()=>{
-        const chapterNum = parseInt(chapter, 10);
-    
-    if (isNaN(chapterNum) || chapterNum < 1 || chapterNum > 18) {
-        navigate('/');
-    } else {
+    const chapterNum = Number(chapter);
+    const isValidChapter = chapterNum >= 1 && chapterNum <= 18;
+
+    React.useEffect(() => {
+        if (!isValidChapter) {
+            navigate("/", { replace: true }); // replace is IMPORTANT
+        return;
+        }
+
         getVerses();
         window.scrollTo(0, 0);
+    }, [chapter, isValidChapter, navigate]);
+
+    // ⛔ Stop render immediately for invalid chapter
+    if (!isValidChapter) {
+        return null;
     }
-    }, [chapter])
 
     if(!verses){
         return(
@@ -72,9 +79,15 @@ export default function Chapter() {
                     className="absolute top-0 left-0 w-full h-full object-cover opacity-20 pointer-events-none z-0"
                 />
                 <div className="relative px-4 py-6">
-                    <h2 className="text-xl md:text-3xl font-bold text-yellow-950 mb-4">
-                    Chapter {chapter} : {Chapters[chapter - 1].name_translated}
-                    </h2>
+                    <button 
+                        className="text-xl md:text-3xl font-bold text-yellow-950 mb-4" 
+                        onClick={()=>{
+                            console.log('Clicked')
+                            navigate('/')
+                        }}
+                    >
+                        Chapter {chapter} : {Chapters[chapter - 1].name_translated}
+                    </button>
                     <p className="text-sm md:text-xl font-semibold leading-relaxed max-w-[500px] mx-auto">
                     {Chapters[chapter - 1].chapter_summary}
                     </p>
@@ -90,9 +103,15 @@ export default function Chapter() {
                 />
                 <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
                     <div className="text-center p-8">
-                    <h2 className="text-xl md:text-4xl font-bold text-yellow-950 mb-4">
-                        Chapter {chapter} : {Chapters[chapter-1].name_translated}
-                    </h2>
+                    <button 
+                        className="text-xl md:text-4xl font-bold text-yellow-950 mb-4" 
+                        onClick={()=>{
+                            console.log('Clicked')
+                            navigate('/')
+                        }}
+                    >
+                        Chapter {chapter} : {Chapters[chapter - 1].name_translated}
+                    </button>
                     <p className="text-sm md:text-xl text-gray-900 font-semibold leading-relaxed max-w-[500px] mx-auto">
                         {Chapters[chapter-1].chapter_summary}
                     </p>
