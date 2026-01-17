@@ -1,4 +1,4 @@
-export default [
+verses = [
   {
     "id": 281,
     "verse_number": 1,
@@ -750,3 +750,6 @@ export default [
     ]
   }
 ]
+
+
+export default verses;
