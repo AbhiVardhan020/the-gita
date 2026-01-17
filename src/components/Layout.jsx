@@ -11,6 +11,7 @@ export default function Layout() {
                 <img  
                     src='/images/Logo4.png'
                     className='w-7 md:w-10'
+                    alt='Image loading'
                 />
                 <h1 className="text-3xl md:text-5xl text-[#D4AF37]">The Gita</h1>
             </div>

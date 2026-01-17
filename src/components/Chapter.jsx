@@ -11,24 +11,24 @@ export default function Chapter() {
     
     const [verses, setVerses] = React.useState([])
 
-    const getVerses = async()=>{
-        try {
-            const verse = await import(`../verses/v${chapter}.js`)
-            setVerses(verse.default)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
+    
     const chapterNum = Number(chapter);
     const isValidChapter = chapterNum >= 1 && chapterNum <= 18;
-
+    
     React.useEffect(() => {
         if (!isValidChapter) {
             navigate("/", { replace: true }); // replace is IMPORTANT
-        return;
+            return;
         }
-
+        
+        const getVerses = async()=>{
+            try {
+                const verse = await import(`../verses/v${chapter}.js`)
+                setVerses(verse.default)
+            } catch (error) {
+                console.log(error.message)
+            }
+        }
         getVerses();
         window.scrollTo(0, 0);
     }, [chapter, isValidChapter, navigate]);
@@ -137,6 +137,7 @@ export default function Chapter() {
                                 <img  
                                 src='/images/Logo4.png'
                                 className='w-5 md:w-7 me-3 shrink-0'
+                                alt='Image loading'
                                 />
                                 <div className='whitespace-nowrap text-lg md:text-2xl'>Verse {num}</div>
                             </div>
