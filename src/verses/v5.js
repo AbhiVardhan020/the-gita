@@ -1,4 +1,4 @@
-verses = [
+const verses = [
   {
     "id": 205,
     "verse_number": 1,

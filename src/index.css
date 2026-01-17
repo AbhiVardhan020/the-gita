@@ -6,30 +6,16 @@
     font-family: "Mate SC", serif;
 }
 
-/* html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-}
-
-body {
-  background-image: url('/public/images/Parch1.png');
-  background-repeat: repeat;              
-  background-size: 800px auto;             
-  background-position: center top;
-  background-attachment: fixed;            
-} */
-
 
 .bgParch{
-    background-image: url('/public/images/Parch1.png');
+    background-image: url('/public/images/Parch1.webp');
     min-height: 100vh;
     background-position: center top;
 }
 
 .borderImg {
     border: 35px solid black;
-    border-image: url('/public/images/B3.jpg') 13% repeat;
+    border-image: url('/public/images/B3.webp') 13% repeat;
 }
 
 .mask{
